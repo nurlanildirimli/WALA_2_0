@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "puppeteer": "^22.6.0",
+    "webextension-polyfill": "^0.10.0"
+  }
+}
