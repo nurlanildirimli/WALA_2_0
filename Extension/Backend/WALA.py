@@ -84,12 +84,12 @@ def Scan():
     def calculate_all_complexities_with_throttling(inner_url, index, vis, dist, te_im, tex, ima):
         try:
             semaphore.acquire()  # Acquire semaphore before making a request
-            response = requests.get(inner_url, timeout=60)
+            response = requests.get(inner_url, timeout=240, headers={"User-Agent":"XY"})
+            if response.status_code != 200:
+                response = requests.get(inner_url, timeout=240, headers={"User-Agent":"XY"} ,verify=False)
             if response.status_code == 200:
                 # Process response...
                 threads1 = []
-                if text_image == "true" or textc == "true" or image == "true":
-                    response = requests.get(inner_url, timeout=240)
                 if visualcomp == "true":
                     threads1.append(threading.Thread(target=calculate_visual_complexity, args=(inner_url, vis, index)))
                 if distin == "true":
